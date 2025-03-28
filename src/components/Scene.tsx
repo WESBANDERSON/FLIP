@@ -15,8 +15,18 @@ export function Scene() {
         toneMappingExposure: 1.2,
         pixelRatio: Math.min(window.devicePixelRatio, 2)
       }}
-      style={{ background: '#000000' }}
+      style={{ 
+        background: '#000000',
+        width: '100%',
+        height: '100%',
+        position: 'fixed',
+        top: 0,
+        left: 0
+      }}
+      dpr={[1, 2]}
     >
+      <color attach="background" args={['#000000']} />
+      
       {/* Lighting setup */}
       <directionalLight
         position={[5, 5, 5]}
