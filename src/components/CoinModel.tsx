@@ -248,18 +248,43 @@ export function CoinModel() {
 
       {/* Additional decorative rings */}
       {[0.88, 0.96].map((radius, i) => (
-        <mesh key={`decorative-ring-${i}`} castShadow>
+        <mesh
+          key={`decorative-ring-${i}`}
+          castShadow
+          position={[0, 0, 0]}
+        >
           <torusGeometry args={[radius, 0.02, 32, 128]} />
           <meshPhysicalMaterial
-            color={new THREE.Color('#FFD700').convertSRGBToLinear()}
+            color={new THREE.Color('#DAA520').convertSRGBToLinear()}
             metalness={1}
-            roughness={0.1}
-            envMapIntensity={2}
-            clearcoat={1}
-            clearcoatRoughness={0.1}
+            roughness={0.2}
+            envMapIntensity={1.5}
+            clearcoat={0.8}
+            clearcoatRoughness={0.2}
+            sheen={0.5}
+            sheenRoughness={0.2}
+            sheenColor={new THREE.Color('#8B7355').convertSRGBToLinear()}
           />
         </mesh>
       ))}
+
+      {/* Center piece */}
+      <mesh castShadow position={[0, 0, 0]}>
+        <cylinderGeometry args={[0.3, 0.3, 0.02, 32]} />
+        <meshPhysicalMaterial
+          color={new THREE.Color('#FFD700').convertSRGBToLinear()}
+          metalness={1}
+          roughness={0.1}
+          envMapIntensity={2}
+          clearcoat={1}
+          clearcoatRoughness={0.1}
+          reflectivity={1}
+          ior={1.5}
+          sheen={0.8}
+          sheenRoughness={0.2}
+          sheenColor={new THREE.Color('#FFE5B4').convertSRGBToLinear()}
+        />
+      </mesh>
     </group>
   );
 } 
