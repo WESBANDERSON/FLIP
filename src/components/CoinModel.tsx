@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
-import { MeshTransmissionMaterial } from '@react-three/drei';
 
 export function CoinModel() {
   const coinRef = useRef<THREE.Group>(null);
