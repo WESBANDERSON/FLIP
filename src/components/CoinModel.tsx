@@ -11,7 +11,9 @@ export function CoinModel() {
     const createRandomFlip = () => {
       const tl = gsap.timeline({
         onComplete: () => {
-          createRandomFlip(); // Chain the next random flip
+          setTimeout(() => {
+            createRandomFlip(); // Chain the next random flip after a variable delay
+          }, Math.random() * 1000 + 1000); // Random delay between 1-2 seconds
         }
       });
       
@@ -20,17 +22,17 @@ export function CoinModel() {
       coinRef.current!.rotation.set(0, 0, 0);
 
       // Animation parameters
-      const numFlips = 2 + Math.floor(Math.random() * 2); // 2-3 flips for more consistency
-      const flipDuration = 4; // Increased from 2 to 4 seconds
-      const jumpHeight = 1.5; // Fixed height
-      const sideRotation = (Math.random() - 0.5) * Math.PI * 0.1; // Reduced wobble
-      const flipAxis = Math.random() < 0.2 ? "y" : "x"; // 20% chance of side flip
+      const numFlips = 2 + Math.floor(Math.random() * 3); // 2-4 flips for more variation
+      const flipDuration = 3 + Math.random() * 2; // 3-5 seconds for more natural feel
+      const jumpHeight = 1.5 + Math.random() * 0.5; // Variable height 1.5-2.0
+      const sideRotation = (Math.random() - 0.5) * Math.PI * 0.15; // Slightly increased wobble
+      const flipAxis = Math.random() < 0.3 ? "y" : "x"; // Increased chance of side flip to 30%
       
       // Main flip animation
       tl.to(coinRef.current!.rotation, {
         [flipAxis]: Math.PI * 2 * numFlips,
         duration: flipDuration,
-        ease: "power2.inOut" // Consistent easing
+        ease: "power2.inOut"
       })
       // Jump animation
       .to(coinRef.current!.position, {
@@ -47,18 +49,18 @@ export function CoinModel() {
       // Slight wobble on landing
       .to(coinRef.current!.rotation, {
         z: sideRotation,
-        duration: 0.6, // Increased from 0.3
+        duration: 0.6,
         ease: "power2.out"
-      }, flipDuration - 0.4) // Adjusted timing
+      }, flipDuration - 0.4)
       // Stabilize
       .to(coinRef.current!.rotation, {
         z: 0,
-        duration: 0.8, // Increased from 0.4
+        duration: 0.8,
         ease: "power2.out"
-      }, flipDuration + 0.2) // Adjusted timing
+      }, flipDuration + 0.2)
       // Longer pause before next flip
       .to({}, {
-        duration: 3 // Increased from 1 to 3 seconds
+        duration: 3
       });
 
       return tl;
@@ -75,9 +77,9 @@ export function CoinModel() {
   }, []);
 
   // Create an array of decorative rings with more spacing
-  const rings = Array.from({ length: 8 }, (_, i) => {
-    const radius = 1 - (i * 0.1); // Increased spacing between rings
-    const thickness = 0.025 + (i * 0.002); // Slightly thicker rings
+  const rings = Array.from({ length: 4 }, (_, i) => {
+    const radius = 1 - (i * 0.15); // Increased spacing between rings even more
+    const thickness = 0.035 + (i * 0.002); // Thicker rings for better visibility
     // More contrast in metallic values
     const metallic = i % 2 ? 0.8 : 1;
     // More contrast in roughness
@@ -86,9 +88,9 @@ export function CoinModel() {
   });
 
   // Create spiral pattern rings with more elements
-  const spiralRings = Array.from({ length: 8 }, (_, i) => {
-    const baseRadius = 0.4 + (i * 0.06);
-    const thickness = 0.015 + (i * 0.001);
+  const spiralRings = Array.from({ length: 4 }, (_, i) => {
+    const baseRadius = 0.45 + (i * 0.08); // Wider spacing between spiral rings
+    const thickness = 0.02 + (i * 0.002); // Thicker spiral rings for better visibility
     return { radius: baseRadius, thickness };
   });
 
